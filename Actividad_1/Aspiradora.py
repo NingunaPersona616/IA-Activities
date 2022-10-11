@@ -10,6 +10,7 @@ class Aspiradora:
         self.status = INACTIVE  #status de la accion
         self.location = location  #Localizacion de la aspiradora
         self.actions = 0
+        self.energy = 100   #Cantidad de energia del robot
 
     def start(self):    #Inicio del funcionamiento de la aspiradora
         print("Hay: ", self.env_A.trash, "basuras en el Entorno A")
@@ -29,6 +30,7 @@ class Aspiradora:
                 print("Moviendo a B")
                 self.location = 'B'
                 self.actions += 1
+                self.energy -= 5    #Disminuye la energia y aumenta la cant de movs
 
             else:                       #La segunda: El entorno A esta sucio, se limpia y se mueve a B
                 self.status = CLEANING
@@ -41,6 +43,7 @@ class Aspiradora:
                 print("Moviendo a B")
                 self.location = 'B'
                 self.actions += 2
+                self.energy -= 10    #Disminuye la energia y aumenta la cant de movs
         
         elif(self.location == "B"): #Si la aspiradora se encuentra en B hay 2 opciones
             if(self.env_B.isClean()):   #La primera: el entorno B esta limpio y se mueve a el entorno A
@@ -49,6 +52,7 @@ class Aspiradora:
                 print("Moviendo a A")
                 self.location = 'A'
                 self.actions += 1
+                self.energy -= 5    #Disminuye la energia y aumenta la cant de movs
 
             else:                       #La segunda: El entorno B esta sucio, se limpia y se mueve al entorno A
                 self.status = CLEANING
@@ -61,3 +65,4 @@ class Aspiradora:
                 print("Moviendo a A")
                 self.location = 'A'
                 self.actions += 2
+                self.energy -= 10    #Disminuye la energia y aumenta la cant de movs

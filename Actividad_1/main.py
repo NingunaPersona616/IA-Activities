@@ -18,3 +18,4 @@ aspiradora1.start()
 
 
 print("Cantidad total de movimientos: ", aspiradora1.actions)
+print("energia restante: ", aspiradora1.energy)
