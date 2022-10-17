@@ -8,6 +8,7 @@ class Aspiradora:
         self.env_A = env_A
         self.env_B = env_B
         self.status = INACTIVE  #status de la accion
+        self.statusPrev = INACTIVE #status de la accion anterior
         self.location = location  #Localizacion de la aspiradora
         self.actions = 0
         self.energy = 100   #Cantidad de energia del robot
@@ -19,26 +20,30 @@ class Aspiradora:
             self.clean()
 
         print("Esta todo limpio apagando ...")  #Una vez que termine de limpiar se apaga
+        self.statusPrev = self.status
         self.status = INACTIVE
 
     def clean(self):    #Funcion que le indica a la aspiradora como limpiar en cada momento
+        self.statusPrev = INACTIVE
         self.status = INACTIVE
         if(self.location == 'A'):   #Si la aspiradora se encuentra en A hay 2 opciones
             if(self.env_A.isClean()):   #La primera: el entorno A esta limpio y se mueve a B
                 print("Limpio A")
+                self.statusPrev = self.status
                 self.status = MOV_B
                 print("Moviendo a B")
                 self.location = 'B'
                 self.actions += 1
                 self.energy -= 5    #Disminuye la energia y aumenta la cant de movs
-
             else:                       #La segunda: El entorno A esta sucio, se limpia y se mueve a B
+                self.statusPrev = self.status
                 self.status = CLEANING
                 for i in range(self.env_A.trash):
                     print('Aspirando A ...')
                     self.env_A.trash -= 1
                 
                 print("Limpio A")
+                self.statusPrev = self.status
                 self.status = MOV_B
                 print("Moviendo a B")
                 self.location = 'B'
@@ -48,6 +53,7 @@ class Aspiradora:
         elif(self.location == "B"): #Si la aspiradora se encuentra en B hay 2 opciones
             if(self.env_B.isClean()):   #La primera: el entorno B esta limpio y se mueve a el entorno A
                 print("Limpio B")   
+                self.statusPrev = self.status
                 self.status = MOV_A
                 print("Moviendo a A")
                 self.location = 'A'
@@ -61,6 +67,7 @@ class Aspiradora:
                     self.env_B.trash-=1
 
                 print("Limpio B")
+                self.statusPrev = self.status
                 self.status = MOV_A
                 print("Moviendo a A")
                 self.location = 'A'
