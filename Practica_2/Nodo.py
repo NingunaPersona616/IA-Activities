@@ -63,6 +63,35 @@ class Node:
                 openNodes.append(newData)
                 self.Nodes[0].expandNodes(openNodes, level+1) #Expandimos el nuevo nodo creado
 
+        #Si sue puede mover hacia abajo
+        if self.down == True:
+            newData = self.Data
+
+            aux = newData[self.x_Pos+1][self.y_Pos] #guarda el dato que esta abajo de el
+            newData[self.x_Pos+1][self.y_Pos] = 0  #mueve el espacio en blanco hacia abajo
+            newData[self.x_Pos][self.y_Pos] = aux  #mueve el de abajo hacia arriba
+
+            if newData in openNodes == False:    #Si el nodo por abir no ha sido abierto
+                newNode = Node()                
+                newNode.setSolucion(newData)    #Guarda el nuevo nodo
+
+                self.Nodes.append(newNode)
+                openNodes.append(newData)
+                self.Nodes[0].expandNodes(openNodes, level+1) #Expandimos el nuevo nodo creado
+
+        #Si sue puede mover hacia la izquierda
+        if self.left == True:
+            aux = newData[self.x_Pos][self.y_Pos-1] #guarda el dato que esta a su izquierda
+            newData[self.x_Pos][self.y_Pos-1] = 0   #mueve el espacio en blanco hacia la izquierda
+            newData[self.x_Pos][self.y_Pos] = aux   #mueve el dato hacia la derecha
+
+            if newData in openNodes == False:    #Si el nodo por abir no ha sido abierto
+                newNode = Node()                
+                newNode.setSolucion(newData)    #Guarda el nuevo nodo
+
+                self.Nodes.append(newNode)
+                openNodes.append(newData)
+                self.Nodes[0].expandNodes(openNodes, level+1) #Expandimos el nuevo nodo creado
         pass
 
         #FALTA BORRAR LOS NODOS CUANDO VENGA DE REGRESE EN EL BACKTRACKING
