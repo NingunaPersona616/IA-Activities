@@ -11,11 +11,13 @@ class Tree:
         self.path=[]
 
     def deepSearch(self):
+        print("Estado inicial:")
+        print(initialState, '\n')
         result = self.root.expandNodes(self.nodesList,0, self.path)
         if isSolution(result):
-            print("se encontro la solucion")
+            print("se encontro la solucion, y su camino es:")
 
-            print(target, '\n')
-            for node in self.path:
+            print(initialState, '\n')
+            for node in reversed(self.path):
                 print(node, "\n")
-            print(initialState)
+            print(target)

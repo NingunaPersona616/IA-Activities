@@ -43,8 +43,8 @@ class Node:
                     self.y_Pos = j
                     break
         
-        print("Abriendo Nodo")
-        print(Solution, "\n")
+        #print("Abriendo Nodo")
+        #print(Solution, "\n")
 
         if self.x_Pos == 0: #si esta en el primer renglon no puede moverse hacia arriba
             self.up = False
@@ -73,8 +73,8 @@ class Node:
 
 
             if isSolution(newData):
-                print("Solucion")
-                print(newData, "\n")
+                #print("Solucion")
+                #print(newData, "\n")
                 return newData
 
             #Suponiendo que in hace comparaciones de matrices uno a uno
@@ -103,8 +103,8 @@ class Node:
             newData[self.x_Pos][self.y_Pos] = aux  #mueve el de abajo hacia arriba
 
             if isSolution(newData):
-                print("Solucion")
-                print(newData, "\n")
+                #print("Solucion")
+                #print(newData, "\n")
                 return newData
 
             if(self.isOpened(newData, openNodes)) == False:     #Si el nodo por abir no ha sido abierto
@@ -132,8 +132,8 @@ class Node:
             newData[self.x_Pos][self.y_Pos] = aux   #mueve el dato hacia la derecha
 
             if isSolution(newData):
-                print("Solucion")
-                print(newData, "\n")
+                #print("Solucion")
+                #print(newData, "\n")
                 return newData
 
             if(self.isOpened(newData, openNodes)) == False:    #Si el nodo por abir no ha sido abierto
@@ -161,8 +161,8 @@ class Node:
             newData[self.x_Pos][self.y_Pos] = aux  #Mueve el otro dato a la izquiera
 
             if isSolution(newData):
-                print("Solucion")
-                print(newData, "\n")
+                #print("Solucion")
+                #print(newData, "\n")
                 return newData
 
             #Suponiendo que in hace comparaciones de matrices uno a uno
