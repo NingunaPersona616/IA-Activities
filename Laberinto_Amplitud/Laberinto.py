@@ -47,3 +47,19 @@ class Laberinto:
                 else:
                     print(columna, end='')  
             print()
+
+    def dibujar_falla(self, estadosExplorados):
+        for i, fila in enumerate(self.contenido):                           #Recorremos todo el contenido de la matriz en memoria.
+            for j, columna in enumerate(fila):
+                if columna == ' ':                                          #Si la ubicación no contiene nada, entonces.
+                    if (i, j) in estadosExplorados:                               #Si esta ubicación ya se encuentra en los nodos expandidos, se marca con -.
+                        print('-', end='')
+                    else:
+                        print(' ', end='')
+
+                elif columna == '#':
+                    print('█', end='')
+
+                else:
+                    print(columna, end='')  
+            print()
