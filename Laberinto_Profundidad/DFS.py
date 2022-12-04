@@ -27,33 +27,33 @@ def DFS_Interface(estado, estadosExplorados):
     
 
 def DFS(nodoActual, estadosExplorados, depth):
-    if depth == maxDepth:
-        print("Murio")
+    if depth == maxDepth:   #Si llego al maximo de profundidad, regresa nulo
+        #print("Murio")
         return None
-    estadosExplorados.append(nodoActual.estado)
+
+    estadosExplorados.append(nodoActual.estado) #Agrega el estado del nodo actual a los estado explorados
     
-    if nodoActual.estado == laberinto.meta:   #Si encontro solucion
-        Solution = copy.copy(nodoActual)
+    if nodoActual.estado == laberinto.meta:   #Si encontro solucion en el nodoActual
+        Solution = copy.copy(nodoActual)    #Regresa el nodo actual
         return Solution
     
+    #Si el nodo actual no es solucion:
     nodoActual.setAcciones(nodoActual.estado, estadosExplorados)    #Busca a que coordenadas se puede mover desde el actual
 
-    if not nodoActual.moves:  #Si el nodo actual no tiene movs
+    if not nodoActual.moves:  #Si el nodo actual no tiene movs regresa nulo
         return None
 
     else:   #Si se pueden generar movimientos con el nodo actual
-        nodoSig = Nodo(None, None)
-        for move in nodoActual.moves:   #Agregamos los nuevos nodos dependiendo de sus movimientos
-            nodoSig.nodoPadre   = nodoActual
-            nodoSig.estado      = move
-            nodoActual.nodos.append(copy.copy(nodoSig))
+        for move in nodoActual.moves:   #Movimiento por movimiento creamos y expandimos cada nuevo nodo hijo
+            nodoSig = Nodo(move, nodoActual) #Asignamos al nuevo nodo hijo su estado(mov) y su padre
+            nodoActual.nodos.append(copy.copy(nodoSig)) #Agregamos el nuevo hijo a la lista de hijos del nodo padre
 
-            Solution = DFS(nodoSig, estadosExplorados, depth+1)
+            Solution = DFS(nodoSig, estadosExplorados, depth+1) #Expandimos el nuevo nodo hijo recien creado
 
-            if Solution is not None and Solution.estado == laberinto.meta:   #Si encontro solucion
+            if Solution is not None and Solution.estado == laberinto.meta:   #Si encontro solucion al expandir al hijo
                 return Solution
 
-    return None #Si ninguno de sus nodos tiene la solucion regresa none
+    return None #Si al expandir todos los nodos hijos del nodoActual y ninguno tiene la solucion regresa none
 
 laberinto = Laberinto('laberinto.txt')  
 estados_explorados = []
