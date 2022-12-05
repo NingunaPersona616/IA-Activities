@@ -37,9 +37,9 @@ def calcularHeuristica(node):            #Función para calcular la heurística.
 if __name__ == '__main__':
     numbers = [0,1,2,3,4,5,6,7,8]   #Declaracón del arreglo de números válidos en el 8 Puzzle.
 
-    nodoInicial = random.sample(numbers,9)   #Elección aleatoria del orden de los números para el 8 Puzzle.
+    #nodoInicial = random.sample(numbers,9)   #Elección aleatoria del orden de los números para el 8 Puzzle.
     nodoFinal = [0,1,2,3,4,5,6,7,8]          #Declaración del estado objetivo.
-    #nodoInicial = [7,8,6,4,3,5,1,2,0]       #Ejemplo sencillo
+    nodoInicial = [8,0,4,2,3,1,7,5,6]       #Ejemplo sencillo
 
     print('B Ú S Q U E D A    A* ')
 
