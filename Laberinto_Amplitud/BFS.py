@@ -47,20 +47,20 @@ def BFS(estado, estadosExplorados):
         nodoActual.setAcciones(nodoActual.estado, estadosExplorados)    #Busca a que coordenadas se puede mover desde el actual
 
         if not nodoActual.moves:  #Si el nodo actual no tiene movs
-            candidatos.popleft()    #Quitamos el nodo recien agregado porque es un nodo Nulo
+            candidatos.popleft()    #Quitamos el nodo recien agregado de la cola porque es un nodo Nulo
 
         else:   #Si se pueden generar movimientos con el nodo actual
             aux = Nodo(None, None)
-            for move in nodoActual.moves:   #Agregamos los nuevos nodos dependiendo de sus movimientos
+            for move in nodoActual.moves:   #Agregamos los nuevos nodos a la cola de candidatos dependiendo de sus movimientos
                 aux.nodoPadre   = nodoActual
                 aux.estado      = move
                 candidatos.append(copy.copy(aux))
                 nodoActual.nodos.append(copy.copy(aux))
                 estadosExplorados.append(aux.estado)
 
-            candidatos.popleft()    #Eliminamos el nodoActual de los candidatos
+            candidatos.popleft()    #Eliminamos el nodoActual de la cola de los candidatos
 
-        if len(candidatos) > 0: #Si aun quedan candidatos
+        if len(candidatos) > 0: #Si aun quedan candidatos se escoge el primero en la cola como el actual
             nodoActual = candidatos[0]
 
         i += 1
@@ -79,8 +79,8 @@ if __name__ == '__main__':
 
     if solution is not None:
         ruta.append(solution.estado)
-        Aux = solution.nodoPadre
-        while True:
+        Aux = solution.nodoPadre            #Empezando en la solucion
+        while True:                         #Va de abajo hacia arriba buscando en los padres de los nodos la ruta hacia la raiz.
             if Aux.nodoPadre == None:
                 ruta.append(Aux.estado)
                 break
